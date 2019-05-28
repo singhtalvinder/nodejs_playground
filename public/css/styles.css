@@ -1,7 +1,50 @@
+body {
+    color: darkgreen;
+    font-family: arial;
+    max-width: 650px;
+    margin: 0 auto; /*  margin puts space outside the box. top bottom - 0 ,  left right - auto*/
+    padding: 0 16px; /* padding puts spaces inside the box. top bottom - 0 ,  left right - auto*/
+
+    display: flex; /* use flex(flexbox) to use the css styling for footer.*/
+    flex-direction: column; /* specify the flex direction.*/
+    min-height: 100vh; /* set 100 % of the viewport height*/
+}
+
+.main-content {
+    flex-grow: 1; /*Main content to take all left over space.*/
+}
+footer {
+    color: lightslategray;
+    border-top : 1px solid #eeeeee; /* width, type, color code*/
+    /*background: lightcyan;*/
+    margin-top: 16px;
+    padding: 16px 0; /* 16 px for top and bottom, 0 for left and right*/
+}
+header {
+    margin-top: 16px;
+    margin-bottom: 48px; 
+}
 h1 {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+/* Links only inside header*/
+header a {
+    color: red;
+    margin-right: 16px;
+    text-decoration: none; /* remove underline from the links*/
+
+}
+
+/* Class selector*/
+.portrait {
+    width: 250px;
+}
+
+/* h1 {
     color: blueviolet;
 }
 
 img {
     width: 250px;
-}
+} */
