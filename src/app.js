@@ -1,6 +1,9 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs') // required for partials.
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
+
 
 // NOTE:  nodemon doesn't detect changes to the hbs files so we need to tell
 // nodemon to take care of that as well as below:
@@ -85,10 +88,28 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    res.send({
-        forecast: 'cloudy',
-        location: 'Toronto, on',
-        address: req.query.address
+    // Process the request to get the latitude and longitude for an address.
+    geocode(req.query.address, (error, data) => {
+        if(error) {
+            return res.send({error})
+        }
+
+        const latitude = data.latitude
+        const longitude = data.longitude
+        
+        // Get the forecast for the location data.
+        forecast(latitude,longitude, (error, forecastData) =>{
+            if(error) {
+                return res.send({error})
+            }
+
+            // All well. send the forecast for the location.
+            res.send({
+                forecast : forecastData,
+                location : data.location,
+                address: req.query.address
+            })
+        })
     })
 })
 
