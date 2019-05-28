@@ -71,12 +71,48 @@ app.get('/help', (req, res) =>{
 //     res.send('<h1>This is about page.</h1>')
 // })
 
+// Get the weather for a specific address.
+// usage: /weather?address=toronto, on
+
 app.get('/weather', (req, res) => {
+
+    console.log(req.query)
+
+    // Address must be supplied.
+    if(!req.query.address) {
+        return res.send({
+            error: 'Please specify an address to get the weather information.'
+        })
+    }
+
     res.send({
         forecast: 'cloudy',
-        location: 'Toronto, on'
+        location: 'Toronto, on',
+        address: req.query.address
     })
 })
+
+app.get('/products', (req, res) => {
+    // Use req.query to get the search criteria on this '/products' category to get 
+    // only those specifc results.
+    // The query on the browser may look like :
+    // http://localhost:3000/products?search=tyres&type=winter
+    // The query object received here would look like:
+    //{ search: 'tyres', type: 'winter' }
+    // To make the 'search' be compulsary to access this link, 
+    // we need to specify it as follows:
+    if(!req.query.search) {
+        return res.send({
+            error: 'Please specify a search criteria for the products.'
+        })
+    }
+
+    console.log(req.query)
+    res.send({
+        products: []
+    })
+})
+
 
 app.get('/help/*', (req, res) => {
     res.render('404', {
