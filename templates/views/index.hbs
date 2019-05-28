@@ -6,11 +6,17 @@
     </head>
     <body>
         <!--Using hbs, getting values dynamically -->
-        <h1>{{title}}</h1>
+        <!--<h1>{{title}}</h1> -->
+        <!-- Render partials here:
+        for that we need 2-cirly braces and a greater than sign between these 2-pairs
+        after the > sign, add the partials file name without extension.
+        Like below:-->
+        {{>header}}
+        <h2>This is the index page,  under construction.</h2>
         <!--
             old way aithout hbs .
             <h1> The Weather app's home page!! </h1>
         <h1> Served using hbs. </h1> -->
-
+        {{>footer}}
     </body>
 </html>
