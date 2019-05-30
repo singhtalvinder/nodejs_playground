@@ -4,7 +4,7 @@ const request = require('request')
 // pass address to the fn and execute callback with the result.
 const geocode= (address, callback) =>{
 
-    const url = 'http://www.mapquestapi.com/geocoding/v1/address?key=YOUR_KEY_HERE&location=' + encodeURIComponent(address)
+    const url = 'http://www.mapquestapi.com/geocoding/v1/address?key=bBgeYbFvjuwSnLTZ47nzhgBAXZsHIS2P&location=' + encodeURIComponent(address)
 
     request({url, json: true}, (error, response) =>{
         if(error) {
