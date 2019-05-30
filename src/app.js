@@ -14,6 +14,10 @@ console.log(__dirname)
 console.log(path.join(__dirname, '../public'))
 
 const app = express()
+
+// Get port for prod delpoyments, or run on port 3000.
+const port = process.env.PORT || 3000;
+
 const publicDirPath = path.join(__dirname, '../public')
 
 // hbs by default, requires the files to be served, be in views folder at root level.(can be configured. )
@@ -152,7 +156,11 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () =>{
-    console.log('Server stated at port:3000')
+// Port 3000 is for local testing. 
+// Heroku provides its own port for deployment and should be used
+// when deployin to heroku.
+//app.listen(3000, () =>{
+app.listen(port, () =>{
+    console.log('Server stated at port:' + port)
 
 })

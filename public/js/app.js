@@ -23,7 +23,10 @@ weatherForm.addEventListener('submit', (event) => {
     message_Two.textContent = ''
 
     // fetch the information for the given location.
-    fetch('http://localhost:3000/weather?address=' + location).then((response) => {
+    // a localhost location will not work on prod deploymenet servers so must be changed accordingly.
+    // For heroku: We remove the domain completely.
+    //fetch('http://localhost:3000/weather?address=' + location).then((response) => {
+    fetch('/weather?address=' + location).then((response) => {
     response.json().then((data) => {
         if(data.error) {
             console.log(data.error)  
