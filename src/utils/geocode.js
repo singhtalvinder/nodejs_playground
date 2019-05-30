@@ -4,7 +4,7 @@ const request = require('request')
 // pass address to the fn and execute callback with the result.
 const geocode= (address, callback) =>{
 
-    const url = 'http://www.mapquestapi.com/geocoding/v1/address?key=<ADD_YOUR-KEY-HERE>&location=' + encodeURIComponent(address)
+    const url = 'http://www.mapquestapi.com/geocoding/v1/address?key=YOUR_KEY_HERE&location=' + encodeURIComponent(address)
 
     request({url, json: true}, (error, response) =>{
         if(error) {
@@ -15,35 +15,42 @@ const geocode= (address, callback) =>{
         } else if(response.error){
             errorString = 'API error:'+ response.error  + "status code" +  response.statusCode;
             console.log(errorString)
-
             callback(errorString, undefined)
         } else {
-            console.log('API response status code'+ response.body.info.statuscode  +
-             'res body info status:'+ response.body.info.statuscode +
-             ', size: ' + response.body.results[0].locations.length)
+            if(response.body)
+            {
+                console.log('API response status code'+ response.body.info.statuscode  +
+                'res body info status:'+ response.body.info.statuscode +
+                ', size: ' + response.body.results[0].locations.length)
 
-            if(response.body.info.statuscode != 400 &&  response.body.results[0].locations.length>=1) {
-              const latitude = response.body.results[0].locations[0].latLng.lat
-              const longitude  = response.body.results[0].locations[0].latLng.lng
-              const providedLocation = response.body.results[0].providedLocation.location
-        
-              data = latitude + ',' + longitude;
-             console.log(`Location: ${providedLocation} has the following coords: Latitude: ${latitude}, longitude: ${longitude}`)
-            //   callback(undefined, {
-            //       latitude: latitude,
-            //       longitude: longitude,
-            //       location: providedLocation
-            //   })
-            // Short hand.
-            callback(undefined, {
-                latitude,
-                longitude,
-                location: providedLocation
-            })
+                if(response.body.info.statuscode != 400 &&  response.body.results[0].locations.length>=1) {
+                const latitude = response.body.results[0].locations[0].latLng.lat
+                const longitude  = response.body.results[0].locations[0].latLng.lng
+                const providedLocation = response.body.results[0].providedLocation.location
+            
+                data = latitude + ',' + longitude;
+                console.log(`Location: ${providedLocation} has the following coords: Latitude: ${latitude}, longitude: ${longitude}`)
+                //   callback(undefined, {
+                //       latitude: latitude,
+                //       longitude: longitude,
+                //       location: providedLocation
+                //   })
+                // Short hand.
+                    callback(undefined, {
+                        latitude,
+                        longitude,
+                        location: providedLocation
+                    })
+                } else {
+                errorMsg = `Something is wrong . API response status code:' ${response.body.info.statuscode}`
+                console.log('something is wrong . API response status code' +  response.body.info.statuscode)
+                callback(errorMsg, undefined)
+                }
             } else {
-              errorMsg = `Something is wrong . API response status code:' ${response.body.info.statuscode}`
-              console.log('something is wrong . API response status code' +  response.body.info.statuscode)
-              callback(errorMsg, undefined)
+                errorMsg = `Something went wrong, may be mistyped address . API response status code: ${response.error}`
+                console.log(errorMsg)
+                callback(errorMsg, undefined)
+
             }
         }
     })

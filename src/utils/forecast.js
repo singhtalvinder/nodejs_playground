@@ -4,7 +4,7 @@
 const request = require('request')
 
 const forecast = (latitude, longitude, callback) =>{
-    const url = `https://api.darksky.net/forecast/5f5d3ac05715854ff7257a5ed20b78ae/${latitude},${longitude}`
+    const url = `https://api.darksky.net/forecast/YOUR_KEY_HERE/${latitude},${longitude}`
 
     // send the request.
     //request({url: url, json: true}, (error, response) => {
@@ -35,14 +35,14 @@ const forecast = (latitude, longitude, callback) =>{
 module.exports = forecast
 
 // for C instead of F.
-//const url = 'https://api.darksky.net/forecast/5f5d3ac05715854ff7257a5ed20b78ae/37.8267,-122.4233?units=si'
+//const url = 'https://api.darksky.net/forecast/f7257a5/37.8267,-122.4233?units=si'
 
 // show in C and language is punjabi.
-//const url = 'https://api.darksky.net/forecast/5f5d3ac05715854ff7257a5ed20b78ae/43.328674,-79.817734?units=si&lang=pa'
+//const url = 'https://api.darksky.net/forecast/v/43.328674,-79.817734?units=si&lang=pa'
 
-//const url = 'https://api.darksky.net/forecast/5f5d3ac05715854ff7257a5ed20b78ae/43.328674,-79.817734'
+//const url = 'https://api.darksky.net/forecast/f7257a5/43.328674,-79.817734'
 
-// const url = 'https://api.darksky.net/forecast/5f5d3ac05715854ff7257a5ed20b78ae/43.328674,-79.817734'
+// const url = 'https://api.darksky.net/forecast/f7257a5/43.328674,-79.817734'
 // request({url: url, json: true}, (error, response) => {
 //     if(error) {
 //         console.log('Error is ' + error)

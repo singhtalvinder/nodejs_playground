@@ -41,6 +41,20 @@ header a {
     width: 250px;
 }
 
+input {
+    border: 1px solid darkgray;
+    padding: 8px;
+
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    background: darkgray;
+    padding: 8px;
+    color: white;
+}
+
 /* h1 {
     color: blueviolet;
 }
